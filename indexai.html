@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Style Academic Roadmap</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+/* ===== BODY ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+  background: #0f172a;
+}
+
+/* ===== DYNAMIC GRADIENT BACKGROUND ===== */
+.bg-gradient {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(-45deg, #0d6efd, #6610f2, #0dcaf0, #20c997);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  z-index: -2;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== FLOATING BLOBS ===== */
+.blob {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  filter: blur(100px);
+  animation: float 12s ease-in-out infinite;
+}
+
+.blob1 { top: 5%; left: 10%; }
+.blob2 { top: 50%; left: 75%; animation-delay: 3s; }
+.blob3 { top: 30%; left: 50%; animation-delay: 6s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) }
+  50% { transform: translateY(-60px) }
+}
+
+/* ===== SECTION ===== */
+.academic-section {
+  padding: 100px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== TITLE ===== */
+.section-title {
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 70px;
+  font-size: 2.5rem;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Vertical line */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background: #fff;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Timeline items */
+.timeline-item {
+  width: 50%;
+  padding: 25px 40px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 0.6s;
+}
+
+.timeline-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-item.left { left: 0; }
+.timeline-item.right { left: 50%; }
+
+/* Timeline dot */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #0dcaf0;
+  border-radius: 50%;
+  top: 30px;
+}
+
+.timeline-item.left::before { right: -10px; }
+.timeline-item.right::before { left: -10px; }
+
+/* ===== GLASSMORPHISM CARD ===== */
+.academic-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  border-radius: 15px;
+  padding: 25px;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.academic-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ICONS */
+.icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  display: inline-block;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px) {
+  .timeline::after { left: 20px; }
+  .timeline-item { width: 100%; padding-left: 60px; padding-right: 20px; }
+  .timeline-item.right { left: 0; }
+  .timeline-item::before { left: 10px; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Background Effects -->
+<div class="bg-gradient"></div>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+
+<!-- Academic Section -->
+<section class="academic-section">
+  <h2 class="section-title">My Academic Roadmap</h2>
+
+  <div class="timeline">
+
+    <div class="timeline-item left">
+      <div class="academic-card">
+        <div class="icon">🎓</div>
+        <h5>School</h5>
+        <p>Completed schooling with strong fundamentals.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item right">
+      <div class="academic-card">
+        <div class="icon">📘</div>
+        <h5>PUC</h5>
+        <p>Focused on higher secondary education.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item left">
+      <div class="academic-card">
+        <div class="icon">💻</div>
+        <h5>BCA</h5>
+        <p>Learned programming and development skills.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item right">
+      <div class="academic-card">
+        <div class="icon">🚀</div>
+        <h5>Currently</h5>
+        <p>Enhancing web development & modern tech skills.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Scroll Animation -->
+<script>
+const items = document.querySelectorAll('.timeline-item');
+
+window.addEventListener('scroll', () => {
+  const triggerBottom = window.innerHeight * 0.85;
+  items.forEach(item => {
+    const boxTop = item.getBoundingClientRect().top;
+    if(boxTop < triggerBottom){
+      item.classList.add('show');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
